@@ -17,6 +17,6 @@ public class UserService {
     }
 
     public User getUserById(Long userId) {
-         return repository.getReferenceById(userId);
+        return repository.findById(userId).orElse(null);
     }
 }
