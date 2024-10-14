@@ -12,15 +12,14 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
-@Entity
+@Entity(name = "User")
 @Table(name = "Users")
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
-@EqualsAndHashCode(of = "id")
 public class User implements UserDetails {
-    @Id @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @NotNull
@@ -37,7 +36,10 @@ public class User implements UserDetails {
 
     @PrePersist
     public void prePersist() {
-        createdAt = new Date();
+        var current_timestamp = new Date();
+
+        createdAt = current_timestamp;
+        updatedAt = current_timestamp;
     }
 
     @PreUpdate
